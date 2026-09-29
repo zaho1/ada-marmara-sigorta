@@ -10,10 +10,12 @@ import {
   ArrowRight,
   ArrowLeft,
   Loader2,
-  MapPin,
 } from 'lucide-react';
 import { useState } from 'react';
 import type { InsuranceType } from '@/lib/supabase';
+import { formatTrPhone, isValidTrPhone, toE164Tr } from '@/lib/phone';
+
+const FORMSPREE_ENDPOINT = 'https://formspree.io/f/xvkgvwll';
 
 const HERO_BG =
   'https://images.pexels.com/photos/358549/pexels-photo-358549.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080&fit=crop';
@@ -72,17 +74,21 @@ export default function Hero() {
     return true;
   };
 
-  const validateStep3 = (): boolean => {
-    if (!formData.firstName.trim() || !formData.lastName.trim()) return false;
-    const phoneClean = formData.phone.replace(/\s/g, '');
-    if (!/^05\d{9}$/.test(phoneClean)) return false;
-    return true;
+  const step3Error = (): string | null => {
+    if (!formData.firstName.trim() || !formData.lastName.trim()) {
+      return 'Lütfen ad ve soyadınızı girin.';
+    }
+    if (!isValidTrPhone(formData.phone)) {
+      return 'Lütfen geçerli bir Türkiye telefon numarası girin (05XX XXX XX XX).';
+    }
+    return null;
   };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (!validateStep3()) {
-      setError('Lütfen tüm alanları doğru formatta doldurunuz.');
+    const step3 = step3Error();
+    if (step3) {
+      setError(step3);
       return;
     }
     if (!insuranceType) return;
@@ -90,20 +96,31 @@ export default function Hero() {
     setSubmitting(true);
     setError(null);
 
-    const payload = {
-      insurance_type: INSURANCE_OPTIONS.find((o) => o.id === insuranceType)?.label ?? insuranceType,
-      first_name: formData.firstName.trim(),
-      last_name: formData.lastName.trim(),
-      phone: formData.phone.trim(),
-      tc_kimlik_no: needsVehicleFields ? formData.tcKimlikNo.trim() : '',
-      plaka: needsVehicleFields ? formData.plaka.trim() : '',
-      il: needsAddressFields ? formData.il.trim() : '',
-      ilce: needsAddressFields ? formData.ilce.trim() : '',
-      mahalle: needsAddressFields ? formData.mahalle.trim() : '',
+    const insuranceLabel =
+      INSURANCE_OPTIONS.find((o) => o.id === insuranceType)?.label ?? insuranceType;
+    const phoneE164 = toE164Tr(formData.phone);
+    const phoneDisplay = formatTrPhone(formData.phone);
+
+    const payload: Record<string, string> = {
+      _subject: `Yeni teklif talebi — ${insuranceLabel}`,
+      'Sigorta Türü': insuranceLabel,
+      Ad: formData.firstName.trim(),
+      Soyad: formData.lastName.trim(),
+      Telefon: `${phoneDisplay} (${phoneE164})`,
     };
 
+    if (needsVehicleFields) {
+      payload['TC Kimlik No'] = formData.tcKimlikNo.trim();
+      payload.Plaka = formData.plaka.trim();
+    }
+    if (needsAddressFields) {
+      payload.İl = formData.il.trim();
+      payload.İlçe = formData.ilce.trim();
+      payload.Mahalle = formData.mahalle.trim();
+    }
+
     try {
-      const response = await fetch('https://formspree.io/f/xvkgvwll', {
+      const response = await fetch(FORMSPREE_ENDPOINT, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
         body: JSON.stringify(payload),
@@ -138,14 +155,6 @@ export default function Hero() {
     });
     setSubmitted(false);
     setError(null);
-  };
-
-  const formatPhone = (value: string): string => {
-    const digits = value.replace(/\D/g, '').slice(0, 10);
-    if (digits.length <= 3) return digits;
-    if (digits.length <= 6) return `${digits.slice(0, 3)} ${digits.slice(3)}`;
-    if (digits.length <= 8) return `${digits.slice(0, 3)} ${digits.slice(3, 6)} ${digits.slice(6)}`;
-    return `${digits.slice(0, 3)} ${digits.slice(3, 6)} ${digits.slice(6, 8)} ${digits.slice(8)}`;
   };
 
   return (
@@ -367,6 +376,12 @@ export default function Hero() {
                         </div>
                       )}
 
+                      {error && (
+                        <div className="rounded-lg bg-accent-50 border border-accent-200 px-4 py-3 text-sm text-accent-700">
+                          {error}
+                        </div>
+                      )}
+
                       <div className="flex gap-3 pt-2">
                         <button
                           onClick={() => setStep(1)}
@@ -381,7 +396,7 @@ export default function Hero() {
                               setError(null);
                               setStep(3);
                             } else {
-                              setError('Lütfen tüm alanları doğru formatta doldurunuz.');
+                              setError('Lütfen bu adımdaki alanları eksiksiz doldurun (TC 11 hane, plaka veya adres).');
                             }
                           }}
                           className="btn-primary flex-1"
@@ -408,8 +423,12 @@ export default function Hero() {
                             <User className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400" />
                             <input
                               type="text"
+                              autoComplete="given-name"
                               value={formData.firstName}
-                              onChange={(e) => setFormData({ ...formData, firstName: e.target.value })}
+                              onChange={(e) => {
+                                setError(null);
+                                setFormData({ ...formData, firstName: e.target.value });
+                              }}
                               placeholder="Adınız"
                               className="input-field pl-10"
                             />
@@ -419,8 +438,12 @@ export default function Hero() {
                           <label className="block text-sm font-medium text-gray-700 mb-1.5">Soyad</label>
                           <input
                             type="text"
+                            autoComplete="family-name"
                             value={formData.lastName}
-                            onChange={(e) => setFormData({ ...formData, lastName: e.target.value })}
+                            onChange={(e) => {
+                              setError(null);
+                              setFormData({ ...formData, lastName: e.target.value });
+                            }}
                             placeholder="Soyadınız"
                             className="input-field"
                           />
@@ -436,14 +459,19 @@ export default function Hero() {
                           <input
                             type="tel"
                             inputMode="tel"
+                            autoComplete="tel"
                             value={formData.phone}
-                            onChange={(e) =>
-                              setFormData({ ...formData, phone: formatPhone(e.target.value) })
-                            }
-                            placeholder="05xx xxx xx xx"
+                            onChange={(e) => {
+                              setError(null);
+                              setFormData({ ...formData, phone: formatTrPhone(e.target.value) });
+                            }}
+                            placeholder="05XX XXX XX XX"
                             className="input-field pl-10"
                           />
                         </div>
+                        <p className="mt-1.5 text-xs text-gray-500">
+                          11 haneli Türkiye numarası. +90 5xx veya 05xx yapıştırabilirsiniz.
+                        </p>
                       </div>
 
                       {error && (
