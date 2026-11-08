@@ -16,7 +16,10 @@ import { supabase, type InsuranceType, type LeadInsert } from '@/lib/supabase';
 import { formatTrPhone, isValidTrPhone, toE164Tr } from '@/lib/phone';
 import { COMPANY } from '@/lib/constants';
 
-const FORMSPREE_ENDPOINT = 'https://formspree.io/f/xvkgvwll';
+// Talep e-postaları bu adrese gider (FormSubmit). İlk talepte Gmail'e gelen onay mailindeki "Activate" butonuna basılmalıdır.
+const EMAIL_ENDPOINT = 'https://formsubmit.co/ajax/adamarmarasigorta@gmail.com';
+// Talep geldiğinde WhatsApp bildirimi gönderen sunucu fonksiyonu (api/talep-bildirim.js)
+const WHATSAPP_NOTIFY_ENDPOINT = '/api/talep-bildirim';
 
 const HERO_BG =
   'https://images.pexels.com/photos/358549/pexels-photo-358549.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080&fit=crop';
@@ -130,13 +133,21 @@ export default function Hero() {
     ];
     setWhatsappText(waLines.join('\n'));
 
-    // 1) E-posta (Formspree)  2) Yönetim paneline kayıt (Supabase) — biri başarılıysa talep alınmış sayılır
-    const sendEmail = fetch(FORMSPREE_ENDPOINT, {
+    // 1) E-posta  2) WhatsApp bildirimi  3) Yönetim paneline kayıt — biri başarılıysa talep alınmış sayılır
+    const sendEmail = fetch(EMAIL_ENDPOINT, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-      body: JSON.stringify(payload),
+      body: JSON.stringify({ ...payload, _template: 'table', _captcha: 'false' }),
     })
       .then((r) => r.ok)
+      .catch(() => false);
+
+    const notifyWhatsapp = fetch(WHATSAPP_NOTIFY_ENDPOINT, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload),
+    })
+      .then(async (r) => r.ok && (await r.json().catch(() => ({}))).ok === true)
       .catch(() => false);
 
     const lead: LeadInsert = {
@@ -157,10 +168,10 @@ export default function Hero() {
           .catch(() => false)
       : Promise.resolve(false);
 
-    const [emailOk, leadOk] = await Promise.all([sendEmail, saveLead]);
+    const [emailOk, whatsappOk, leadOk] = await Promise.all([sendEmail, notifyWhatsapp, saveLead]);
     setSubmitting(false);
 
-    if (!emailOk && !leadOk) {
+    if (!emailOk && !whatsappOk && !leadOk) {
       setError('Teklif gönderilemedi. Lütfen tekrar deneyin, WhatsApp’tan yazın veya bizi arayın.');
       return;
     }
