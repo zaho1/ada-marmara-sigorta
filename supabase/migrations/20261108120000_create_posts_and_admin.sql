@@ -114,3 +114,20 @@ USING (is_admin());
 -- YÖNETİCİ E-POSTASI (gerekirse değiştirin, birden fazla satır ekleyebilirsiniz)
 INSERT INTO admin_emails (email) VALUES ('adamarmarasigorta@gmail.com')
 ON CONFLICT (email) DO NOTHING;
+
+-- Kapak görselleri için depolama alanı (admin panelinden yükleme)
+insert into storage.buckets (id, name, public, file_size_limit, allowed_mime_types)
+values ('post-images', 'post-images', true, 5242880, array['image/jpeg','image/png','image/webp'])
+on conflict (id) do nothing;
+
+drop policy if exists "post_images_public_read" on storage.objects;
+create policy "post_images_public_read" on storage.objects
+for select to anon, authenticated using (bucket_id = 'post-images');
+
+drop policy if exists "post_images_admin_insert" on storage.objects;
+create policy "post_images_admin_insert" on storage.objects
+for insert to authenticated with check (bucket_id = 'post-images' and public.is_admin());
+
+drop policy if exists "post_images_admin_delete" on storage.objects;
+create policy "post_images_admin_delete" on storage.objects
+for delete to authenticated using (bucket_id = 'post-images' and public.is_admin());

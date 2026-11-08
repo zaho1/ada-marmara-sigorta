@@ -11,6 +11,7 @@ import {
   Plus,
   Save,
   Trash2,
+  ImagePlus,
   X,
 } from 'lucide-react';
 import { supabase, slugify, formatDateTr, type Lead, type Post } from '@/lib/supabase';
@@ -31,6 +32,116 @@ type Draft = {
   cover_image: string;
   published: boolean;
 };
+
+/** Görseli tarayıcıda küçültür (en fazla 1600px, JPEG) — yükleme hızlı, sayfa hafif olsun */
+async function resizeImage(file: File, maxSize = 1600): Promise<Blob> {
+  const url = URL.createObjectURL(file);
+  try {
+    const img = await new Promise<HTMLImageElement>((resolve, reject) => {
+      const i = new Image();
+      i.onload = () => resolve(i);
+      i.onerror = reject;
+      i.src = url;
+    });
+    const scale = Math.min(1, maxSize / Math.max(img.width, img.height));
+    const canvas = document.createElement('canvas');
+    canvas.width = Math.round(img.width * scale);
+    canvas.height = Math.round(img.height * scale);
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return file;
+    ctx.fillStyle = '#ffffff';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+    const blob = await new Promise<Blob | null>((resolve) => canvas.toBlob(resolve, 'image/jpeg', 0.85));
+    return blob ?? file;
+  } finally {
+    URL.revokeObjectURL(url);
+  }
+}
+
+function CoverImageField({ value, onChange }: { value: string; onChange: (url: string) => void }) {
+  const [uploading, setUploading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  const handleFile = async (file: File | undefined) => {
+    if (!file || !supabase) return;
+    if (!file.type.startsWith('image/')) {
+      setError('Lütfen bir görsel dosyası seçin (JPG, PNG).');
+      return;
+    }
+    setUploading(true);
+    setError(null);
+    try {
+      const blob = await resizeImage(file);
+      const path = `kapak/${Date.now()}-${Math.random().toString(36).slice(2, 8)}.jpg`;
+      const { error: upErr } = await supabase.storage
+        .from('post-images')
+        .upload(path, blob, { contentType: 'image/jpeg', upsert: false });
+      if (upErr) throw upErr;
+      const { data } = supabase.storage.from('post-images').getPublicUrl(path);
+      onChange(data.publicUrl);
+    } catch (e) {
+      setError('Görsel yüklenemedi: ' + (e instanceof Error ? e.message : 'bilinmeyen hata'));
+    } finally {
+      setUploading(false);
+    }
+  };
+
+  return (
+    <div>
+      <label className="block text-sm font-medium text-gray-700 mb-1.5">Kapak görseli (isteğe bağlı)</label>
+      {value ? (
+        <div className="relative inline-block">
+          <img src={value} alt="Kapak görseli" className="h-40 w-auto max-w-full rounded-xl border border-gray-200 object-cover" />
+          <button
+            type="button"
+            onClick={() => onChange('')}
+            className="absolute -top-2 -right-2 flex h-8 w-8 items-center justify-center rounded-full bg-white text-gray-600 shadow-md border border-gray-200 hover:text-accent-600"
+            aria-label="Görseli kaldır"
+            title="Görseli kaldır"
+          >
+            <X className="h-4 w-4" />
+          </button>
+        </div>
+      ) : (
+        <label
+          className={`flex flex-col items-center justify-center gap-2 rounded-xl border-2 border-dashed px-6 py-8 text-center cursor-pointer transition-colors ${
+            uploading ? 'border-brand-300 bg-brand-50' : 'border-gray-300 hover:border-brand-400 hover:bg-gray-50'
+          }`}
+          onDragOver={(e) => e.preventDefault()}
+          onDrop={(e) => {
+            e.preventDefault();
+            handleFile(e.dataTransfer.files?.[0]);
+          }}
+        >
+          {uploading ? (
+            <>
+              <Loader2 className="h-7 w-7 animate-spin text-brand-600" />
+              <span className="text-sm text-gray-600">Yükleniyor...</span>
+            </>
+          ) : (
+            <>
+              <ImagePlus className="h-8 w-8 text-gray-400" />
+              <span className="text-sm font-semibold text-gray-700">Görsel seçmek için tıklayın</span>
+              <span className="text-xs text-gray-500">veya sürükleyip bırakın · JPG, PNG</span>
+            </>
+          )}
+          <input
+            type="file"
+            accept="image/*"
+            className="hidden"
+            disabled={uploading}
+            onChange={(e) => {
+              handleFile(e.target.files?.[0]);
+              e.target.value = '';
+            }}
+          />
+        </label>
+      )}
+      {error && <p className="mt-2 text-sm text-accent-700">{error}</p>}
+    </div>
+  );
+}
 
 const EMPTY_DRAFT: Draft = { title: '', excerpt: '', content: '', cover_image: '', published: true };
 
@@ -177,15 +288,7 @@ function PostEditor({
           İpucu: Paragrafları boş satırla ayırın. Ara başlık için satırın başına <b>## </b> yazın.
         </p>
       </div>
-      <div>
-        <label className="block text-sm font-medium text-gray-700 mb-1.5">Kapak görseli bağlantısı (isteğe bağlı)</label>
-        <input
-          value={form.cover_image}
-          onChange={(e) => setForm({ ...form, cover_image: e.target.value })}
-          className="input-field"
-          placeholder="https://..."
-        />
-      </div>
+      <CoverImageField value={form.cover_image} onChange={(url) => setForm({ ...form, cover_image: url })} />
       <label className="flex items-center gap-3 cursor-pointer select-none">
         <input
           type="checkbox"
