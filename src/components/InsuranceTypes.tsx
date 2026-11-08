@@ -1,4 +1,4 @@
-import { Car, ShieldCheck, Home, HeartPulse, Building2, ArrowRight } from 'lucide-react';
+import { Car, ShieldCheck, Home, HeartPulse, Building2, ArrowRight, Briefcase, Truck, Plane, Leaf } from 'lucide-react';
 
 const INSURANCE_TYPES = [
   {
@@ -36,6 +36,34 @@ const INSURANCE_TYPES = [
     color: 'from-teal-500 to-teal-700',
     features: ['Yangın ve su teminatı', 'Hırsızlık koruması', 'Cam kırılması'],
   },
+  {
+    icon: Leaf,
+    title: 'BES Sigortası',
+    description: 'Bina ve Eşya Sigortası ile mülkünüzü tam güvence altına alın.',
+    color: 'from-green-500 to-green-700',
+    features: ['Bina teminatı', 'Eşya teminatı', 'Kapsamlı koruma'],
+  },
+  {
+    icon: Plane,
+    title: 'Seyahat Sigortası',
+    description: 'Yurt içi ve yurt dışı seyahatleriniz için güvence ve sağlık teminatı.',
+    color: 'from-cyan-500 to-cyan-700',
+    features: ['Yurt içi seyahat', 'Yurt dışı seyahat', 'Vize sigortası'],
+  },
+  {
+    icon: Truck,
+    title: 'Nakliyat Sigortası',
+    description: 'Yük ve araç nakliyat işleriniz için kapsamlı sigorta çözümleri.',
+    color: 'from-orange-500 to-orange-700',
+    features: ['Yük teminatı', 'Araç teminatı', 'Sorumluluk sigortası'],
+  },
+  {
+    icon: Briefcase,
+    title: 'İşyeri Sigortası',
+    description: 'İş yerinizi ve çalışanlarınızı kapsamlı sigorta ile koruyun.',
+    color: 'from-purple-500 to-purple-700',
+    features: ['İşyeri teminatı', 'Sorumluluk sigortası', 'Kefalet sigortası'],
+  },
 ];
 
 export default function InsuranceTypes() {
@@ -54,7 +82,7 @@ export default function InsuranceTypes() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
           {INSURANCE_TYPES.map((item, i) => (
             <div
               key={i}
@@ -88,7 +116,7 @@ export default function InsuranceTypes() {
           ))}
 
           {/* CTA card */}
-          <div className="relative rounded-2xl bg-gradient-to-br from-brand-700 to-brand-950 p-6 flex flex-col justify-center items-center text-center shadow-lg">
+          <div className="relative rounded-2xl bg-gradient-to-br from-brand-700 to-brand-950 p-6 flex flex-col justify-center items-center text-center shadow-lg xl:col-span-4">
             <h3 className="text-xl font-bold text-white mb-2">Hangi sigorta sizin için uygun?</h3>
             <p className="text-sm text-gray-300 mb-5 max-w-xs">
               Uzman ekibimiz ihtiyacınıza en uygun sigorta çözümünü bulmanıza yardımcı olur.

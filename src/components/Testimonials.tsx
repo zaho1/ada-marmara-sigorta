@@ -45,11 +45,25 @@ export default function Testimonials() {
                 </div>
                 <div>
                   <div className="font-semibold text-gray-900">{t.name}</div>
-                  <div className="text-xs text-gray-500">{t.location}</div>
                 </div>
               </div>
             </div>
           ))}
+        </div>
+
+        {/* Google Maps Embed */}
+        <div className="mt-12">
+          <div className="rounded-2xl overflow-hidden shadow-lg border border-gray-200">
+            <iframe
+              src="https://maps.google.com/maps?q=Karaosman+Ulus+Cd+No41+54100+Adapazarı+Sakarya&t=&z=15&ie=UTF8&iwloc=&output=embed"
+              width="100%"
+              height="400"
+              style={{ border: 0 }}
+              allowFullScreen
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+            />
+          </div>
         </div>
       </div>
     </section>

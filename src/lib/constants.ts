@@ -1,11 +1,23 @@
 export const COMPANY = {
   name: 'ADA MARMARA Sigorta',
-  phone: '+90 555 470 31 48',
-  phoneRaw: '+905554703148',
+  legalName: 'ADA MARMARA SİGORTA ARACILIK HİZMETLERİ LTD. ŞTİ.',
+  phone: '+90 534 391 44 25',
+  phoneRaw: '+905343914425',
+  gsm: '0544 227 5783',
+  gsmRaw: '+905442275783',
+  whatsapp: '+90 534 391 44 25',
+  whatsappRaw: '+905343914425',
   location: 'Sakarya, Türkiye',
+  address: 'Karaosman Mah. Ulus Cad. No 41/A Adapazarı / Sakarya',
   hours: 'Pzt - Cum 09:00 - 18:00',
-  email: 'info@adamarmarasigorta.com',
+  email: 'adamarmarasigorta@gmail.com',
+  taxOffice: 'Ali Fuat Cebesoy V.D.',
+  taxNo: '007 154 9164',
+  atsoNo: '40766',
+  mersisNo: '0007-1549-1640-0001',
   authorizationNo: '2024TPYS-5801',
+  levhaNo: 'T251223-8614',
+  tobLevhaNo: 'T251223-8614',
 };
 
 export const TICKER_MESSAGES = [
@@ -37,40 +49,34 @@ export const INSURANCE_TYPES = [
 
 export const TESTIMONIALS = [
   {
-    name: 'Ahmet Y.',
-    text: 'Trafik sigortamı çok uygun fiyata ve anında kestiler. Teşekkürler Ada Marmara!',
+    name: 'İrem K.',
+    text: 'Sağlık sigortam için aramıştım telefonu açan beyefendi çok ilgiliydi ismini hatırlayamadım yorum yazmak istedim. poliçemi en hızlı şekilde çözdüğü için teşekkür ederim :)',
     rating: 5,
-  location: 'Adapazarı, Sakarya',
   },
   {
-    name: 'Ayşe T.',
-    text: 'Sakarya\'da güvenilir bir acente arıyordum, kasko işlemimi çok hızlı hallettiler.',
+    name: 'Abdullah S.',
+    text: 'Titiz, dürüst ve işini seven biri. İşimi en doğru ve pratik şekilde hallettiği için de kendisine buradan da teşekkür etmek istedim.',
     rating: 5,
-    location: 'Serdivan, Sakarya',
   },
   {
-    name: 'Mehmet K.',
-    text: 'DASK poliçemi 2 dakikada düzenlediler. Profesyonel ve hızlı hizmet!',
+    name: 'Ömer Faruk Y.',
+    text: 'İlgili yaklaşımınız, güler yüzünüz ve hızlı çözüm üretebilirliğiniz için çok teşekkür ederim. Sigorta konusunda aradığım güveni burada buldum, 5 yıldızı fazlasıyla hak ediyorlar.',
     rating: 5,
-    location: 'Erenler, Sakarya',
   },
   {
-    name: 'Zeynep A.',
-    text: 'Sağlık sigortam için en uygun teklifi verdiler. Her aşamada bilgilendirdiler.',
+    name: 'Mert K.',
+    text: 'İlgili ve bilgili bir acente. Sunduğunuz hizmet için teşekkürler',
     rating: 5,
-    location: 'Karasu, Sakarya',
   },
   {
-    name: 'Caner D.',
-    text: 'Konut sigortamı yaptırdım, fiyatlar çok uygundu. Kesinlikle tavsiye ederim.',
+    name: 'Barış Ç.',
+    text: 'Şeffaf ve hızlı işlemler için teşekkürler.',
     rating: 5,
-    location: 'Söğütlü, Sakarya',
   },
   {
-    name: 'Fatma S.',
-    text: 'Trafik ve kasko poliçelerimi birlikte kestiler, büyük indirim sağladılar. Teşekkürler!',
+    name: 'Enes S.',
+    text: 'Enes bey sürecin en başından beri çok ilgiliydi. Tüm konularda şeffaf bir şekilde bilgi verdi. Çok memnun kaldık herkese tavsiye ederim.',
     rating: 5,
-    location: 'Akyazı, Sakarya',
   },
 ];
 

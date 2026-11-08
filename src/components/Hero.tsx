@@ -12,8 +12,9 @@ import {
   Loader2,
 } from 'lucide-react';
 import { useState } from 'react';
-import type { InsuranceType } from '@/lib/supabase';
+import { supabase, type InsuranceType, type LeadInsert } from '@/lib/supabase';
 import { formatTrPhone, isValidTrPhone, toE164Tr } from '@/lib/phone';
+import { COMPANY } from '@/lib/constants';
 
 const FORMSPREE_ENDPOINT = 'https://formspree.io/f/xvkgvwll';
 
@@ -54,6 +55,7 @@ export default function Hero() {
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [whatsappText, setWhatsappText] = useState('');
 
   const handleTypeSelect = (type: InsuranceType) => {
     setInsuranceType(type);
@@ -119,26 +121,56 @@ export default function Hero() {
       payload.Mahalle = formData.mahalle.trim();
     }
 
-    try {
-      const response = await fetch(FORMSPREE_ENDPOINT, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-        body: JSON.stringify(payload),
-      });
+    // WhatsApp'a gidecek hazır mesaj
+    const waLines = [
+      'Merhaba, web sitenizden teklif talebi gönderdim.',
+      ...Object.entries(payload)
+        .filter(([key]) => key !== '_subject')
+        .map(([key, value]) => `${key}: ${value}`),
+    ];
+    setWhatsappText(waLines.join('\n'));
 
-      setSubmitting(false);
+    // 1) E-posta (Formspree)  2) Yönetim paneline kayıt (Supabase) — biri başarılıysa talep alınmış sayılır
+    const sendEmail = fetch(FORMSPREE_ENDPOINT, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+      body: JSON.stringify(payload),
+    })
+      .then((r) => r.ok)
+      .catch(() => false);
 
-      if (!response.ok) {
-        setError('Teklif gönderilemedi. Lütfen tekrar deneyin veya bizi arayın.');
-        return;
-      }
+    const lead: LeadInsert = {
+      insurance_type: insuranceType,
+      first_name: formData.firstName.trim(),
+      last_name: formData.lastName.trim(),
+      phone: phoneE164,
+      ...(needsVehicleFields
+        ? { tc_kimlik_no: formData.tcKimlikNo.trim(), plaka: formData.plaka.trim() }
+        : {}),
+      ...(needsAddressFields
+        ? { il: formData.il.trim(), ilce: formData.ilce.trim(), mahalle: formData.mahalle.trim() }
+        : {}),
+    };
+    const saveLead = supabase
+      ? Promise.resolve(supabase.from('leads').insert(lead))
+          .then(({ error: dbError }) => !dbError)
+          .catch(() => false)
+      : Promise.resolve(false);
 
-      setSubmitted(true);
-    } catch {
-      setSubmitting(false);
-      setError('Teklif gönderilemedi. Lütfen tekrar deneyin veya bizi arayın.');
+    const [emailOk, leadOk] = await Promise.all([sendEmail, saveLead]);
+    setSubmitting(false);
+
+    if (!emailOk && !leadOk) {
+      setError('Teklif gönderilemedi. Lütfen tekrar deneyin, WhatsApp’tan yazın veya bizi arayın.');
+      return;
     }
+
+    setSubmitted(true);
   };
+
+  const whatsappUrl = `https://wa.me/${COMPANY.whatsappRaw.replace(/\D/g, '')}?text=${encodeURIComponent(
+    whatsappText || 'Merhaba, sigorta teklifi almak istiyorum.',
+  )}`;
 
   const resetForm = () => {
     setStep(1);
@@ -155,6 +187,7 @@ export default function Hero() {
     });
     setSubmitted(false);
     setError(null);
+    setWhatsappText('');
   };
 
   return (
@@ -174,13 +207,6 @@ export default function Hero() {
         <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
           {/* Left: Headline */}
           <div className="text-white space-y-6 text-center lg:text-left">
-            <div className="inline-flex items-center gap-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 px-4 py-1.5 text-sm font-medium">
-              <span className="relative flex h-2 w-2">
-                <span className="absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75 animate-pulse-ring"></span>
-                <span className="relative inline-flex h-2 w-2 rounded-full bg-green-500"></span>
-              </span>
-              Sakarya'nın güvenilir sigorta acentesi
-            </div>
             <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold leading-tight tracking-tight">
               En Uygun Sigorta Teklifini{' '}
               <span className="text-accent-400">Hemen Alın</span>
@@ -241,9 +267,22 @@ export default function Hero() {
                   <p className="text-gray-600 max-w-sm mx-auto">
                     Uzman ekibimiz en kısa sürede sizinle iletişime geçerek en uygun teklifleri sunacak.
                   </p>
-                  <button onClick={resetForm} className="btn-secondary mt-4">
-                    Yeni Teklif Al
-                  </button>
+                  <div className="flex flex-col sm:flex-row gap-3 justify-center pt-2">
+                    <a
+                      href={whatsappUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center justify-center gap-2 rounded-xl bg-green-600 px-6 py-3 text-base font-semibold text-white shadow-lg shadow-green-600/30 transition-all hover:bg-green-700 active:scale-95"
+                    >
+                      WhatsApp’tan da İlet
+                    </a>
+                    <button onClick={resetForm} className="btn-secondary">
+                      Yeni Teklif Al
+                    </button>
+                  </div>
+                  <p className="text-xs text-gray-500">
+                    Daha hızlı dönüş için talebinizi tek tıkla WhatsApp’tan da gönderebilirsiniz.
+                  </p>
                 </div>
               ) : (
                 <>
@@ -477,6 +516,16 @@ export default function Hero() {
                       {error && (
                         <div className="rounded-lg bg-accent-50 border border-accent-200 px-4 py-3 text-sm text-accent-700">
                           {error}
+                          {whatsappText && (
+                            <a
+                              href={whatsappUrl}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="mt-2 block font-semibold text-green-700 underline"
+                            >
+                              WhatsApp’tan gönder
+                            </a>
+                          )}
                         </div>
                       )}
 

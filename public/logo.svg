@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 450 120" fill="none">
+  <!-- Shield Logo -->
+  <g transform="translate(15, 15)">
+    <!-- Shield outline -->
+    <path d="M50,5 C80,5 100,20 100,50 C100,80 50,110 50,110 C50,110 0,80 0,50 C0,20 20,5 50,5 Z" fill="white" stroke="#E31937" stroke-width="2.5"/>
+    
+    <!-- DNA-like wavy lines -->
+    <path d="M20,30 C28,22 35,22 43,30 C50,38 57,38 65,30 C72,22 80,22 88,30" fill="none" stroke="#003781" stroke-width="2"/>
+    <path d="M20,24 C28,16 35,16 43,24 C50,32 57,32 65,24 C72,16 80,16 88,24" fill="none" stroke="#003781" stroke-width="2"/>
+    
+    <!-- Umbrella -->
+    <path d="M50,42 C70,42 80,55 80,62 L80,68 L20,68 L20,62 C20,55 30,42 50,42 Z" fill="#003781"/>
+    <line x1="50" y1="68" x2="50" y2="82" stroke="#003781" stroke-width="2.5"/>
+    <path d="M47,82 C43,86 43,90 47,90 C50,90 50,86 47,82 Z" fill="#003781"/>
+    
+    <!-- Y-D text -->
+    <text x="50" y="62" font-family="Arial, sans-serif" font-size="10" font-weight="bold" fill="#1a1a1a" text-anchor="middle">Y-D</text>
+    
+    <!-- Black curved shape at bottom -->
+    <path d="M20,92 C32,90 68,90 80,92 L80,96 C68,98 32,98 20,96 Z" fill="#1a1a1a"/>
+  </g>
+  
+  <!-- ADA MARMARA text -->
+  <text x="130" y="55" font-family="Arial, sans-serif" font-size="36" font-weight="bold" fill="#E31937">
+    ADA MARMARA
+  </text>
+  
+  <!-- Sigorta text -->
+  <text x="130" y="85" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#003781">
+    Sigorta
+  </text>
+</svg>

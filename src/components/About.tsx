@@ -1,4 +1,4 @@
-import { ShieldCheck, MapPin, Phone, Clock, Users, Award, Building, Handshake } from 'lucide-react';
+import { ShieldCheck, Clock, Users, Award, Building, Handshake, MapPin } from 'lucide-react';
 import { COMPANY } from '@/lib/constants';
 
 const STATS = [
@@ -30,42 +30,9 @@ export default function About() {
   return (
     <section id="hakkimizda" className="bg-white section-padding">
       <div className="mx-auto max-w-7xl">
-        {/* Top: Image + intro */}
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
-          {/* Left: Office image placeholder */}
-          <div className="relative">
-            <div className="relative rounded-2xl overflow-hidden shadow-2xl aspect-[4/3] bg-gradient-to-br from-brand-100 to-brand-200">
-              {/* Placeholder image — replace with actual office photo later */}
-              <img
-                src="https://images.pexels.com/photos/8441810/pexels-photo-8441810.jpeg?auto=compress&cs=tinysrgb&w=1200&h=800&fit=crop"
-                alt="ADA MARMARA Sigorta ofisi"
-                className="h-full w-full object-cover"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-brand-950/40 to-transparent" />
-              {/* Image label */}
-              <div className="absolute bottom-4 left-4 right-4">
-                <div className="inline-flex items-center gap-2 rounded-lg bg-white/90 backdrop-blur-sm px-3 py-1.5 text-sm font-medium text-brand-800 shadow-md">
-                  <MapPin className="h-4 w-4 text-accent-600" />
-                  Sakarya Ofisimiz
-                </div>
-              </div>
-            </div>
-            {/* Floating badge */}
-            <div className="absolute -bottom-6 -right-2 sm:right-6 bg-white rounded-2xl shadow-xl p-5 border border-gray-100">
-              <div className="flex items-center gap-3">
-                <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-accent-50">
-                  <ShieldCheck className="h-7 w-7 text-accent-600" />
-                </div>
-                <div>
-                  <div className="text-2xl font-extrabold text-brand-900">Güvenilir</div>
-                  <div className="text-sm text-gray-500">Sigorta Acentesi</div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Right: Content */}
-          <div className="space-y-6">
+        {/* Top: Content */}
+        <div className="max-w-4xl mx-auto">
+          <div className="space-y-6 text-center">
             <span className="inline-block rounded-full bg-brand-50 px-4 py-1.5 text-sm font-semibold text-brand-700">
               Hakkımızda
             </span>
@@ -100,22 +67,6 @@ export default function About() {
                   <div className="text-xs text-gray-500 mt-0.5">{stat.label}</div>
                 </div>
               ))}
-            </div>
-
-            {/* Quick info */}
-            <div className="flex flex-wrap gap-4 pt-2">
-              <div className="flex items-center gap-2 text-sm text-gray-600">
-                <MapPin className="h-5 w-5 text-accent-600" />
-                {COMPANY.location}
-              </div>
-              <div className="flex items-center gap-2 text-sm text-gray-600">
-                <Phone className="h-5 w-5 text-accent-600" />
-                {COMPANY.phone}
-              </div>
-              <div className="flex items-center gap-2 text-sm text-gray-600">
-                <Clock className="h-5 w-5 text-accent-600" />
-                {COMPANY.hours}
-              </div>
             </div>
           </div>
         </div>

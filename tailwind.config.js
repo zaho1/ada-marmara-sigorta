@@ -50,7 +50,7 @@ export default {
         },
       },
       animation: {
-        marquee: 'marquee 30s linear infinite',
+        marquee: 'marquee 75s linear infinite',
         'fade-in-up': 'fade-in-up 0.5s ease-out forwards',
         'slide-in': 'slide-in 0.4s ease-out forwards',
         'pulse-ring': 'pulse-ring 1.5s ease-out infinite',

@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <!-- Shield outline -->
+  <path d="M32,4 C52,4 64,12 64,32 C64,52 32,64 32,64 C32,64 0,52 0,32 C0,12 12,4 32,4 Z" fill="white" stroke="#E31937" stroke-width="3"/>
+  
+  <!-- DNA-like wavy lines -->
+  <path d="M12,20 C18,14 24,14 30,20 C36,26 42,26 48,20 C54,14 60,14 66,20" fill="none" stroke="#003781" stroke-width="2"/>
+  <path d="M12,16 C18,10 24,10 30,16 C36,22 42,22 48,16 C54,10 60,10 66,16" fill="none" stroke="#003781" stroke-width="2"/>
+  
+  <!-- Umbrella -->
+  <path d="M32,28 C44,28 52,36 52,40 L52,44 L12,44 L12,40 C12,36 20,28 32,28 Z" fill="#003781"/>
+  <line x1="32" y1="44" x2="32" y2="54" stroke="#003781" stroke-width="2.5"/>
+  <path d="M30,54 C27,57 27,60 30,60 C32,60 32,57 30,54 Z" fill="#003781"/>
+  
+  <!-- Y-D text -->
+  <text x="32" y="40" font-family="Arial, sans-serif" font-size="6" font-weight="bold" fill="#1a1a1a" text-anchor="middle">Y-D</text>
+  
+  <!-- Black curved shape at bottom -->
+  <path d="M12,58 C20,56 44,56 52,58 L52,61 C44,63 20,63 12,61 Z" fill="#1a1a1a"/>
+</svg>
