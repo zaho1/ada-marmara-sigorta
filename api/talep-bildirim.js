@@ -11,7 +11,6 @@ const ALLOWED_FIELDS = [
   'Ad',
   'Soyad',
   'Telefon',
-  'TC Kimlik No',
   'Plaka',
   'İl',
   'İlçe',
