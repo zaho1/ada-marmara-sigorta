@@ -33,11 +33,11 @@ const TYPE_ICONS: Record<string, typeof Car> = {
 };
 
 const INSURANCE_OPTIONS = [
-  { id: 'trafik' as InsuranceType, label: 'Trafik Sigortası', icon: 'Car', description: 'Zorunlu trafik sigortası' },
-  { id: 'kasko' as InsuranceType, label: 'Kasko', icon: 'ShieldCheck', description: 'Kasko sigortası' },
-  { id: 'dask' as InsuranceType, label: 'DASK', icon: 'Home', description: 'Deprem sigortası' },
-  { id: 'saglik' as InsuranceType, label: 'Sağlık Sigortası', icon: 'HeartPulse', description: 'Sağlık sigortası' },
-  { id: 'konut' as InsuranceType, label: 'Konut Sigortası', icon: 'Building2', description: 'Konut sigortası' },
+  { id: 'trafik' as InsuranceType, label: 'Trafik Sigortası', icon: 'Car', description: 'Zorunlu araç sigortası' },
+  { id: 'kasko' as InsuranceType, label: 'Kasko', icon: 'ShieldCheck', description: 'Aracınız için tam koruma' },
+  { id: 'dask' as InsuranceType, label: 'DASK', icon: 'Home', description: 'Zorunlu deprem sigortası' },
+  { id: 'saglik' as InsuranceType, label: 'Sağlık Sigortası', icon: 'HeartPulse', description: 'Özel ve tamamlayıcı sağlık' },
+  { id: 'konut' as InsuranceType, label: 'Konut Sigortası', icon: 'Building2', description: 'Ev ve eşya güvencesi' },
 ];
 
 type Step = 1 | 2 | 3;

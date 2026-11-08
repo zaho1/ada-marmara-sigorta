@@ -68,7 +68,7 @@ export default function Footer() {
           </div>
 
           {/* Address */}
-          <div className="bg-brand-900/50 rounded-xl p-4 border border-brand-800/50 hover:border-brand-700 transition-colors md:col-span-2 lg:col-span-2">
+          <div className="bg-brand-900/50 rounded-xl p-4 border border-brand-800/50 hover:border-brand-700 transition-colors md:col-span-2 lg:col-span-1">
             <div className="flex items-center gap-3 mb-2">
               <div className="flex h-10 w-10 items-center justify-center rounded-full bg-green-500/20">
                 <MapPin className="h-5 w-5 text-green-400" />
@@ -79,7 +79,7 @@ export default function Footer() {
           </div>
 
           {/* Working Hours */}
-          <div className="bg-brand-900/50 rounded-xl p-4 border border-brand-800/50 hover:border-brand-700 transition-colors md:col-span-2 lg:col-span-3">
+          <div className="bg-brand-900/50 rounded-xl p-4 border border-brand-800/50 hover:border-brand-700 transition-colors md:col-span-2 lg:col-span-2">
             <div className="flex items-center gap-3 mb-2">
               <div className="flex h-10 w-10 items-center justify-center rounded-full bg-green-500/20">
                 <Clock className="h-5 w-5 text-green-400" />
@@ -126,7 +126,7 @@ export default function Footer() {
           </div>
           <div className="mt-6 pt-6 border-t border-brand-800/50 text-center">
             <p className="text-xs text-gray-500">
-              © {new Date().getFullYear()} {COMPANY.legalName}. Tüm hakları saklıdır.
+              © {new Date().getFullYear()} {COMPANY.legalName} Tüm hakları saklıdır.
             </p>
           </div>
         </div>

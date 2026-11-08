@@ -22,7 +22,7 @@ const GUIDE_ITEMS = [
     title: 'Aileler ve Bireyler',
     who: 'Herkes, özellikle aileler',
     insurance: 'Sağlık Sigortası / Tamamlayıcı Sağlık Sigortası',
-    text: 'Sağlık sigortası, özel hastanelerde tedavi olma imkânı sunar. Aile paketleriyle tüm aile fertlarınızı tek poliçe altında güvenceye alabilirsiniz. SGK\'ya ek olarak tamamlayıcı sağlık sigortası ile kapsamınızı genişletebilirsiniz.',
+    text: 'Sağlık sigortası, özel hastanelerde tedavi olma imkânı sunar. Aile paketleriyle tüm aile fertlerinizi tek poliçe altında güvenceye alabilirsiniz. SGK\'ya ek olarak tamamlayıcı sağlık sigortası ile kapsamınızı genişletebilirsiniz.',
     color: 'from-rose-500 to-rose-700',
   },
   {
