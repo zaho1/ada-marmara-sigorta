@@ -22,7 +22,7 @@ const PARTNERS: Partner[] = [
   { name: 'HDI', short: 'HDI', bg: 'bg-[#00953f]', text: 'text-white', logo: '/partners/hdi.svg' },
   { name: 'Eureko', short: 'E', bg: 'bg-[#005baa]', text: 'text-white', logo: '/partners/eureko.png' },
   { name: 'Güven Sigorta', short: 'GÜV', bg: 'bg-[#004a98]', text: 'text-white', logo: '/partners/guven.png' },
-  { name: 'Türkiye Hayat', short: 'TH', bg: 'bg-[#d40e1c]', text: 'text-white', logo: '/partners/turkiye-hayat.svg' },
+  { name: 'Türkiye Hayat', short: 'TH', bg: 'bg-[#d40e1c]', text: 'text-white', logo: '/partners/turkiye-hayat.png' },
   { name: 'Bereket Sigorta', short: 'B', bg: 'bg-[#1b7583]', text: 'text-white', logo: '/partners/bereket.png' },
   { name: 'Doğa Sigorta', short: 'D', bg: 'bg-[#2e8b57]', text: 'text-white', logo: '/partners/doga.png' },
 ];
