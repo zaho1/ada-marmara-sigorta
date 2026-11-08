@@ -13,7 +13,7 @@ const PARTNERS: Partner[] = [
   { name: 'Aksigorta', short: 'AKS', bg: 'bg-[#0066b3]', text: 'text-white', logo: '/partners/ak.png' },
   { name: 'Anadolu Sigorta', short: 'AS', bg: 'bg-[#e31937]', text: 'text-white', logo: '/partners/anadolu.svg' },
   { name: 'AXA', short: 'AXA', bg: 'bg-[#00008f]', text: 'text-white', logo: '/partners/axa.svg' },
-  { name: 'Türkiye Sigorta', short: 'TS', bg: 'bg-[#d40e1c]', text: 'text-white', logo: '/partners/turkiye-sigorta.svg' },
+  { name: 'Türkiye Sigorta', short: 'TS', bg: 'bg-[#d40e1c]', text: 'text-white', logo: '/partners/turkiye-sigorta-amblem.svg' },
   { name: 'Zurich', short: 'Z', bg: 'bg-[#0a7d2f]', text: 'text-white', logo: '/partners/zurich.svg' },
   { name: 'Mapfre', short: 'M', bg: 'bg-[#c8102e]', text: 'text-white', logo: '/partners/mapfre.svg' },
   { name: 'Sompo', short: 'SOM', bg: 'bg-[#e60012]', text: 'text-white', logo: '/partners/sompo.svg' },
