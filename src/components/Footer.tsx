@@ -68,18 +68,27 @@ export default function Footer() {
           </div>
 
           {/* Address */}
-          <div className="bg-brand-900/50 rounded-xl p-4 border border-brand-800/50 hover:border-brand-700 transition-colors md:col-span-2 lg:col-span-1">
+          <div className="bg-brand-900/50 rounded-xl p-4 border border-brand-800/50 hover:border-brand-700 transition-colors md:col-span-2 lg:col-span-2">
             <div className="flex items-center gap-3 mb-2">
               <div className="flex h-10 w-10 items-center justify-center rounded-full bg-green-500/20">
                 <MapPin className="h-5 w-5 text-green-400" />
               </div>
               <span className="text-xs text-gray-400">Adres</span>
             </div>
-            <p className="text-base font-semibold">{COMPANY.address}</p>
+            <div className="grid gap-4 sm:grid-cols-2">
+              {COMPANY.branches.map((branch) => (
+                <div key={branch.city}>
+                  <p className="text-xs font-semibold uppercase tracking-wide text-green-400">
+                    {branch.city}
+                  </p>
+                  <p className="text-base font-semibold">{branch.address}</p>
+                </div>
+              ))}
+            </div>
           </div>
 
           {/* Working Hours */}
-          <div className="bg-brand-900/50 rounded-xl p-4 border border-brand-800/50 hover:border-brand-700 transition-colors md:col-span-2 lg:col-span-2">
+          <div className="bg-brand-900/50 rounded-xl p-4 border border-brand-800/50 hover:border-brand-700 transition-colors md:col-span-2 lg:col-span-1">
             <div className="flex items-center gap-3 mb-2">
               <div className="flex h-10 w-10 items-center justify-center rounded-full bg-green-500/20">
                 <Clock className="h-5 w-5 text-green-400" />

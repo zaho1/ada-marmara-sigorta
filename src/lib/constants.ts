@@ -1,3 +1,6 @@
+const SAKARYA_ADDRESS = 'Karaosman Mah. Ulus Cad. No 41/A Adapazarı / Sakarya';
+const ISTANBUL_ADDRESS = 'Merkez Mah. Çukurçeşme Cad. No 19 İç Kapı 9 Gaziosmanpaşa / İstanbul';
+
 export const COMPANY = {
   name: 'ADA MARMARA Sigorta',
   legalName: 'ADA MARMARA SİGORTA ARACILIK HİZMETLERİ LTD. ŞTİ.',
@@ -7,8 +10,14 @@ export const COMPANY = {
   gsmRaw: '+905442275783',
   whatsapp: '+90 534 391 44 25',
   whatsappRaw: '+905343914425',
-  location: 'Sakarya, Türkiye',
-  address: 'Karaosman Mah. Ulus Cad. No 41/A Adapazarı / Sakarya',
+  location: 'İstanbul ve Sakarya, Türkiye',
+  // Yasal merkez adresi (KVKK metni vb. için)
+  address: SAKARYA_ADDRESS,
+  // İletişim bölümünde gösterilen ofisler: İstanbul önce, Sakarya sonra
+  branches: [
+    { city: 'İstanbul', address: ISTANBUL_ADDRESS },
+    { city: 'Sakarya', address: SAKARYA_ADDRESS },
+  ],
   hours: 'Pzt - Cum 09:00 - 18:00',
   email: 'adamarmarasigorta@gmail.com',
   taxOffice: 'Ali Fuat Cebesoy V.D.',
