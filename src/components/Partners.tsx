@@ -38,7 +38,7 @@ export default function Partners() {
             Anlaşmalı Firmalar
           </span>
           <h2 className="text-3xl lg:text-4xl font-extrabold text-gray-900 mb-3">
-            20+ Sigorta Şirketiyle Çalışıyoruz
+            34+ Sigorta Şirketiyle Çalışıyoruz
           </h2>
           <p className="text-lg text-gray-500 max-w-2xl mx-auto">
             Türkiye'nin önde gelen sigorta şirketlerinden karşılaştırmalı teklif sunarak size en uygun fiyatı buluyoruz.

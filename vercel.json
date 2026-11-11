@@ -1,5 +1,6 @@
 {
   "rewrites": [
+    { "source": "/sitemap.xml", "destination": "/api/sitemap" },
     { "source": "/sigorta-aktuel/:slug", "destination": "/api/makale?slug=:slug" },
     { "source": "/((?!api/).*)", "destination": "/index.html" }
   ]

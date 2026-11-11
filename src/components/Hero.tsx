@@ -233,7 +233,7 @@ export default function Hero() {
               <span className="text-accent-400">Hemen Alın</span>
             </h1>
             <p className="text-lg text-gray-200 max-w-xl mx-auto lg:mx-0">
-              Trafik, Kasko, DASK ve Sağlık sigortalarınız için 20+ şirketten karşılaştırmalı teklifler.
+              Trafik, Kasko, DASK ve Sağlık sigortalarınız için 34+ şirketten karşılaştırmalı teklifler.
             </p>
             <div className="flex flex-wrap gap-4 justify-center lg:justify-start">
               <div className="flex items-center gap-2 text-sm text-gray-200">
@@ -246,7 +246,7 @@ export default function Hero() {
               </div>
               <div className="flex items-center gap-2 text-sm text-gray-200">
                 <CheckCircle2 className="h-5 w-5 text-green-400" />
-                20+ sigorta şirketi
+                34+ sigorta şirketi
               </div>
             </div>
           </div>

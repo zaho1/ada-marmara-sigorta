@@ -24,7 +24,7 @@ const FAQ_ITEMS = [
   },
   {
     question: 'Sigorta primi nasıl belirlenir?',
-    answer: 'Sigorta primi; araç yaşı, araç değeri, sürücünün yaş ve ehliyet geçmişi, hasarsızlık durumu, konutun metrekare değeri, sağlık sigortasında yaş ve sağlık durumu gibi faktörlere göre belirlenir. 20+ sigorta şirketinden karşılaştırmalı teklif alarak en uygun fiyatı bulabilirsiniz.',
+    answer: 'Sigorta primi; araç yaşı, araç değeri, sürücünün yaş ve ehliyet geçmişi, hasarsızlık durumu, konutun metrekare değeri, sağlık sigortasında yaş ve sağlık durumu gibi faktörlere göre belirlenir. 34+ sigorta şirketinden karşılaştırmalı teklif alarak en uygun fiyatı bulabilirsiniz.',
   },
   {
     question: 'Poliçemi online alabilir miyim?',
@@ -40,7 +40,7 @@ const FAQ_ITEMS = [
   },
   {
     question: 'Hangi sigorta şirketleriyle çalışıyorsunuz?',
-    answer: 'Allianz, Aksigorta, Anadolu Sigorta, AXA, Türkiye Sigorta, Zurich, Mapfre, Sompo, Quick Sigorta, Ray Sigorta ve daha birçok sigorta şirketiyle yetkili acente olarak çalışıyoruz. 20+ şirketten karşılaştırmalı teklif sunarak en uygun fiyatı bulmanızı sağlıyoruz.',
+    answer: 'Allianz, Aksigorta, Anadolu Sigorta, AXA, Türkiye Sigorta, Zurich, Mapfre, Sompo, Quick Sigorta, Ray Sigorta ve daha birçok sigorta şirketiyle yetkili acente olarak çalışıyoruz. 34+ şirketten karşılaştırmalı teklif sunarak en uygun fiyatı bulmanızı sağlıyoruz.',
   },
 ];
 

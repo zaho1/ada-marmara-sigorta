@@ -1,6 +1,12 @@
 import { Star, Quote } from 'lucide-react';
 import { TESTIMONIALS } from '@/lib/constants';
 
+// Ofis haritaları: İstanbul solda, Sakarya sağda (mobilde alt alta)
+const OFFICE_MAPS = [
+  { city: 'İstanbul', query: 'Merkez Mah. Çukurçeşme Cad. No 19 Gaziosmanpaşa İstanbul' },
+  { city: 'Sakarya', query: 'Karaosman Ulus Cd No41 54100 Adapazarı Sakarya' },
+];
+
 export default function Testimonials() {
   return (
     <section className="bg-gradient-to-b from-gray-50 to-white section-padding">
@@ -51,19 +57,27 @@ export default function Testimonials() {
           ))}
         </div>
 
-        {/* Google Maps Embed */}
-        <div className="mt-12">
-          <div className="rounded-2xl overflow-hidden shadow-lg border border-gray-200">
-            <iframe
-              src="https://maps.google.com/maps?q=Karaosman+Ulus+Cd+No41+54100+Adapazarı+Sakarya&t=&z=15&ie=UTF8&iwloc=&output=embed"
-              width="100%"
-              height="400"
-              style={{ border: 0 }}
-              allowFullScreen
-              loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
-            />
-          </div>
+        {/* Google Maps Embed: İstanbul ve Sakarya ofisleri */}
+        <div className="mt-12 grid gap-6 md:grid-cols-2">
+          {OFFICE_MAPS.map((office) => (
+            <div key={office.city}>
+              <h3 className="mb-3 text-center text-lg font-bold text-gray-900">
+                {office.city} Ofisimiz
+              </h3>
+              <div className="rounded-2xl overflow-hidden shadow-lg border border-gray-200">
+                <iframe
+                  title={`${office.city} ofisi haritası`}
+                  src={`https://maps.google.com/maps?q=${encodeURIComponent(office.query)}&t=&z=15&ie=UTF8&iwloc=&output=embed`}
+                  width="100%"
+                  height="320"
+                  style={{ border: 0 }}
+                  allowFullScreen
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                />
+              </div>
+            </div>
+          ))}
         </div>
       </div>
     </section>

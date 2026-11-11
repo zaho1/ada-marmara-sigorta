@@ -91,7 +91,7 @@ export const TESTIMONIALS = [
 
 export const TRUST_BADGES = [
   { icon: 'Headphones', title: '7/24 Destek', description: 'Her an yanınızdayız, sorularınızı yanıtlamaya hazırız.' },
-  { icon: 'BadgePercent', title: 'En İyi Fiyat Garantisi', description: '20+ şirketten karşılaştırmalı teklif ile en uygun fiyat.' },
+  { icon: 'BadgePercent', title: 'En İyi Fiyat Garantisi', description: '34+ şirketten karşılaştırmalı teklif ile en uygun fiyat.' },
   { icon: 'Zap', title: 'Hızlı ve Güvenilir İşlem', description: 'Poliçeniz dakikalar içinde hazır, güvenle teslim edilir.' },
-  { icon: 'Building2', title: '20+ Sigorta Şirketi', description: 'Türkiye\'nin en büyük sigorta şirketleri tek çatı altında.' },
+  { icon: 'Building2', title: '34+ Sigorta Şirketi', description: 'Türkiye\'nin en büyük sigorta şirketleri tek çatı altında.' },
 ];

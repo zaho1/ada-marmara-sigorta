@@ -4,9 +4,9 @@ const INSURANCE_TYPES = [
   {
     icon: Car,
     title: 'Trafik Sigortası',
-    description: 'Zorunlu trafik sigortanız en uygun fiyatla, anında düzenlenir. 20+ şirketten karşılaştırmalı teklif.',
+    description: 'Zorunlu trafik sigortanız en uygun fiyatla, anında düzenlenir. 34+ şirketten karşılaştırmalı teklif.',
     color: 'from-blue-500 to-blue-700',
-    features: ['Anında poliçe', 'En uygun fiyat', '20+ şirket karşılaştırması'],
+    features: ['Anında poliçe', 'En uygun fiyat', '34+ şirket karşılaştırması'],
   },
   {
     icon: ShieldCheck,
