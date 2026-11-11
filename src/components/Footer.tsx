@@ -125,6 +125,11 @@ export default function Footer() {
             </div>
           </div>
           <div className="mt-6 pt-6 border-t border-brand-800/50 text-center">
+            <p className="mb-2 text-xs">
+              <a href="/kvkk" className="text-gray-400 underline hover:text-white transition-colors">
+                KVKK Aydınlatma Metni
+              </a>
+            </p>
             <p className="text-xs text-gray-500">
               © {new Date().getFullYear()} {COMPANY.legalName} Tüm hakları saklıdır.
             </p>

@@ -1,3 +1,6 @@
 {
-  "rewrites": [{ "source": "/((?!api/).*)", "destination": "/index.html" }]
+  "rewrites": [
+    { "source": "/sigorta-aktuel/:slug", "destination": "/api/makale?slug=:slug" },
+    { "source": "/((?!api/).*)", "destination": "/index.html" }
+  ]
 }

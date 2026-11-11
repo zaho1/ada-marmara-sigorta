@@ -55,6 +55,7 @@ export default function Hero() {
     lastName: '',
     phone: '',
   });
+  const [kvkkAccepted, setKvkkAccepted] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -85,6 +86,9 @@ export default function Hero() {
     }
     if (!isValidTrPhone(formData.phone)) {
       return 'Lütfen geçerli bir Türkiye telefon numarası girin (05XX XXX XX XX).';
+    }
+    if (!kvkkAccepted) {
+      return 'Devam etmek için KVKK Aydınlatma Metni’ni okuduğunuzu onaylayın.';
     }
     return null;
   };
@@ -137,7 +141,12 @@ export default function Hero() {
     const sendEmail = fetch(EMAIL_ENDPOINT, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-      body: JSON.stringify({ ...payload, _template: 'table', _captcha: 'false' }),
+      body: JSON.stringify({
+        ...payload,
+        'KVKK Onayı': `Aydınlatma metni okundu (${new Date().toLocaleString('tr-TR')})`,
+        _template: 'table',
+        _captcha: 'false',
+      }),
     })
       .then((r) => r.ok)
       .catch(() => false);
@@ -196,6 +205,7 @@ export default function Hero() {
       lastName: '',
       phone: '',
     });
+    setKvkkAccepted(false);
     setSubmitted(false);
     setError(null);
     setWhatsappText('');
@@ -523,6 +533,29 @@ export default function Hero() {
                           11 haneli Türkiye numarası. +90 5xx veya 05xx yapıştırabilirsiniz.
                         </p>
                       </div>
+
+                      <label className="flex items-start gap-3 text-sm text-gray-600 cursor-pointer">
+                        <input
+                          type="checkbox"
+                          checked={kvkkAccepted}
+                          onChange={(e) => {
+                            setError(null);
+                            setKvkkAccepted(e.target.checked);
+                          }}
+                          className="mt-0.5 h-5 w-5 shrink-0 rounded border-gray-300 text-brand-600 focus:ring-brand-500"
+                        />
+                        <span>
+                          <a
+                            href="/kvkk"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="font-semibold text-brand-700 underline"
+                          >
+                            KVKK Aydınlatma Metni
+                          </a>
+                          ’ni okudum ve anladım.
+                        </span>
+                      </label>
 
                       {error && (
                         <div className="rounded-lg bg-accent-50 border border-accent-200 px-4 py-3 text-sm text-accent-700">

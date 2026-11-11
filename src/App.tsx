@@ -11,6 +11,7 @@ import About from '@/components/About';
 import Footer from '@/components/Footer';
 import SigortaAktuel from '@/components/SigortaAktuel';
 import Admin from '@/components/Admin';
+import Kvkk from '@/components/Kvkk';
 
 function HomePage() {
   return (
@@ -36,7 +37,9 @@ function App() {
   }
 
   let page = <HomePage />;
-  if (path === '/sigorta-aktuel') {
+  if (path === '/kvkk') {
+    page = <Kvkk />;
+  } else if (path === '/sigorta-aktuel') {
     page = <SigortaAktuel />;
   } else if (path.startsWith('/sigorta-aktuel/')) {
     page = <SigortaAktuel slug={decodeURIComponent(path.slice('/sigorta-aktuel/'.length))} />;
