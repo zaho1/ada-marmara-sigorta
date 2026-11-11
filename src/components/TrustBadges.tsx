@@ -20,7 +20,7 @@ export default function TrustBadges() {
             Güveninizi Kazanıyoruz
           </h2>
           <p className="text-lg text-gray-500 max-w-2xl mx-auto">
-            Sakarya'da yılların deneyimiyle sigorta ihtiyaçlarınız için yanınızdayız.
+            İstanbul ve Sakarya'da yılların deneyimiyle sigorta ihtiyaçlarınız için yanınızdayız.
           </p>
         </div>
 

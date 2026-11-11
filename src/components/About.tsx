@@ -4,7 +4,7 @@ import { COMPANY } from '@/lib/constants';
 const STATS = [
   { icon: Users, label: 'Mutlu Müşteri', value: '5.000+' },
   { icon: Award, label: 'Yıllık Tecrübe', value: '15+' },
-  { icon: ShieldCheck, label: 'Sigorta Şirketi', value: '20+' },
+  { icon: ShieldCheck, label: 'Sigorta Şirketi', value: '34+' },
   { icon: Clock, label: 'Poliçe Düzenlendi', value: '10.000+' },
 ];
 
@@ -17,12 +17,12 @@ const VALUES = [
   {
     icon: Building,
     title: 'Yerel Uzmanlık',
-    text: 'Sakarya\'da yılların deneyimiyle bölgeyi ve müşteri ihtiyaçlarını yakından tanıyoruz.',
+    text: 'İstanbul ve Sakarya\'da yılların deneyimiyle bölgeyi ve müşteri ihtiyaçlarını yakından tanıyoruz.',
   },
   {
     icon: ShieldCheck,
     title: 'Kapsamlı Güvence',
-    text: 'Trafik, Kasko, DASK, Sağlık ve Konut sigortalarında 20+ şirketin karşılaştırmalı teklifini sunuyoruz.',
+    text: 'Trafik, Kasko, DASK, Sağlık ve Konut sigortalarında 34+ şirketin karşılaştırmalı teklifini sunuyoruz.',
   },
 ];
 
@@ -37,16 +37,16 @@ export default function About() {
               Hakkımızda
             </span>
             <h2 className="text-3xl lg:text-4xl font-extrabold text-gray-900 leading-tight">
-              Sakarya'nın Güvenilir Sigorta Acentesi
+              İstanbul ve Sakarya'nın Güvenilir Sigorta Acentesi
             </h2>
             <p className="text-lg text-gray-600 leading-relaxed">
-              <strong className="text-brand-800">ADA MARMARA Sigorta</strong> olarak Sakarya'da
-              yıllardır hizmet veriyoruz. Trafik, Kasko, DASK, Sağlık ve Konut sigortalarında
-              20+ sigorta şirketinden karşılaştırmalı teklif sunarak en uygun fiyatı bulmanızı
+              <strong className="text-brand-800">ADA MARMARA Sigorta</strong> olarak İstanbul ve
+              Sakarya'da yıllardır hizmet veriyoruz. Trafik, Kasko, DASK, Sağlık ve Konut sigortalarında
+              34+ sigorta şirketinden karşılaştırmalı teklif sunarak en uygun fiyatı bulmanızı
               sağlıyoruz.
             </p>
             <p className="text-base text-gray-600 leading-relaxed">
-              Ofisimiz Sakarya'nın merkezinde yer almakta olup, müşterilerimize yüz yüze ve
+              İstanbul ve Sakarya'daki ofislerimizde müşterilerimize yüz yüze ve
               online olarak kesintisiz hizmet sunmaktayız. Deneyimli ekibimiz, sigorta
               süreçlerini baştan sona sizin yerinize takip eder; poliçenizin düzenlenmesinden
               hasar işlemlerine kadar her adımda yanınızda olur.
